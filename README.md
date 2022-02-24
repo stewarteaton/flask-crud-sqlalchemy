@@ -8,4 +8,6 @@ $ flask run
 docker image build -t recycling-partnership .
 <!-- Docker run command: -->
 docker run -p 8881:8881 -d recycling-partnership
-
+<!-- Docker Compose Command -->
+<!-- Docker Compose Benefits: Multiple container, auto builds when code changes -->
+docker-compose up

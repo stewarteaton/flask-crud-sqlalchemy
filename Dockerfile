@@ -1,19 +1,9 @@
-# initialize base image (Alpine is lightweight linux distro)
-FROM python:3-alpine
-
-# define directory
+# syntax=docker/dockerfile:1
+FROM python:3.7-alpine
 WORKDIR /recycling-partnership
-
-# copy contents into working directory
-COPY requirements.txt /recycling-partnership/requirements.txt
-
-# install python dependencies
-# RUN pip3 install --upgrade setuptools
-RUN pip3 install -r /recycling-partnership/requirements.txt
-
-ADD . /recycling-partnership
-
+RUN apk add --no-cache gcc musl-dev linux-headers
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 EXPOSE 8881
-
-# define command to start container
-CMD ["python","app.py"]
+COPY . .
+CMD ["python", "app.py"]

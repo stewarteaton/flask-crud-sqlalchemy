@@ -1,0 +1,13 @@
+
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8881:8881"
+    # # Allows us to automatically rebuild docker when changes are made
+    # volumes:
+    #   - .:/code
+    # # Puts flask in development mode so that changes in code are automatically launched
+    # environment:
+    #   FLASK_ENV: development
