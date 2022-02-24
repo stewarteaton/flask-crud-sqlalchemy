@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %} 
+
+<div class="d-flex flex-column justify-content-center align-items-center mt-3">
+    <h1>Welcome to Pet-DB App !</h1>
+    <br/><br/>
+
+    <div class="row col-6 justify-content-center">
+        <!-- Add Pet -->
+        <form class="d-flex flex-row justify-content-center col-8 align-items-center" action="/new-pet" method="post">
+                <input class="m-2 form-control" placeholder="Pet Name" name="name" type="text" required/>
+                <select name="species" id="species" class='m-2 form-select' required>
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                </select>            
+                <button class="btn btn-primary" style="white-space: nowrap" type="submit">Add Pet!</button>
+        </form>        
+
+        <table class="table table-striped ">
+            <tr class="border-5 black">
+                <th class="text-center align-middle">ID</th>
+                <th class="text-center align-middle">Name</th>
+                <th class="text-center align-middle">Species</th>
+                <th class="text-center align-middle">delete</th>
+                </tr>
+            {% for pet in pets %}
+            <tr>
+                <td class="text-center align-middle">
+                    {{ pet._id }}
+                </td>
+                <td class="text-center align-middle">
+                    <a href="/pet?petID={{ pet._id }}">
+                    {{ pet.name }}
+                    </a>
+                </td>
+                <td class="text-center align-middle">
+                    {{ pet.species }}
+                </td>
+                <td class="text-center ">
+                    <form method="post" action="/" class="inline">
+                        <input type="hidden" name="delete" value="{{ pet._id }}">
+                        <button class="btn btn-danger btn-sm" type="submit">X</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}

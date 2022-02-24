@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %} 
+<div class="container d-flex">
+    <div class="container d-flex flex-column col-6 ">
+        <br />
+        <h3>Searched Pet ID: {{ pet._id }}</h3>
+        <br />
+
+        <!-- Update Form -->
+        <form method="post" action="/pet" class="">
+            <h3>Pet Name: </h3>
+            <input type="hidden" name="update" value="{{ pet._id }}">
+            <input name="name" value="{{ pet.name }}" class="m-2 form-control"/>
+    
+            <h3>Species: </h3>
+            <select name="species" id="species" class='m-2 form-select' >
+                <option value="dog" >Dog</option>
+                <option value="cat" >Cat</option>
+            </select>    
+            
+            <!-- JavaScript logic for making select default to correct species -->
+            <script type="text/javascript">
+                function myFunction() {
+                  let str = '{{pet.species|tojson}}'
+                  let newStr = str.replace(/['"]+/g, '')
+                  document.getElementById("species").value = newStr
+                }
+                myFunction()
+            </script>
+            
+            <button class="btn btn-primary form-control m-1" type="submit">Update</button>
+        </form>
+
+        <!-- Delete Form -->
+        <form method="post" action="/" class="">
+            <input type="hidden" name="delete" value="{{ pet._id }}">
+            <button class="btn btn-danger form-control m-1" type="submit">Delete</button>
+        </form>            
+    </div>
+
+    <!-- Details Column -->
+    <div class="container col-6 m-2">
+        <br/>
+        <h3>Description: </h3>
+        <br />
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    </div>
+</div>
+
+
+{% endblock %}
